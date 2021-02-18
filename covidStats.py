@@ -30,7 +30,7 @@ class country:
 
     def setDeltas(self, code):
         with requests.Session() as s:   
-            r = s.get('https://covid19-api.org/api/status/' + code + '?date=' + getDateWeekAgo())
+            r = s.get('https://covid19-api.org/api/status/' + code + '?date=' + getDate14DaysAgo())
             data = r.text
             j = json.loads(data)
             self.weeklyCases = self.cases - j['cases']
@@ -43,7 +43,7 @@ class country:
         return l
 
 #gets date from 14 days ago
-def getDateWeekAgo():
+def getDate14DaysAgo():
     currentDate = datetime.datetime.now()
     deltaDays = datetime.timedelta(days = 14)
     weekOldDate = currentDate - deltaDays
